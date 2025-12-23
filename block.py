@@ -49,8 +49,9 @@ class Block:
 
             entry.bind("<Button-1>", lambda e, ent=entry: ent.focus_set())
 
-        self.title.bind("<ButtonPress-1>", self.on_press)
-        self.title.bind("<ButtonRelease-1>", self.on_release)
+        for block_segment in (self.widget, self.title):
+            block_segment.bind("<ButtonPress-1>", self.on_press)
+            block_segment.bind("<ButtonRelease-1>", self.on_release)
 
         self.drag_start = None
         self.drop_callback = None
