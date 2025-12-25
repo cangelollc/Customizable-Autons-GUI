@@ -7,21 +7,6 @@ from block import Block
 from block_types import *
 import nt_interface
 
-
-class BlockTypes(Enum):
-    TEST_ONE = "Test Block One"
-    TEST_TWO = "Test Block Two"
-    TEST_THREE = "Test Block Three"
-
-
-# networktables will configure this for us eventually and we will build this dynamically
-
-template_blocks = [
-    (BlockTypes.TEST_ONE, "blue"),
-    (BlockTypes.TEST_TWO, "blue"),
-    (BlockTypes.TEST_THREE, "blue")
-]
-
 nt = nt_interface.NTInterface()
 
 root = tk.Tk()
@@ -58,7 +43,7 @@ sequence_area.frame.pack(fill="both", expand=True)
 
 def handle_drop(block, x, y):
     """When the block is dropped in the sequence area, clone a non template block there."""
-    print(f"Dropped block {block.block_name} at ({x}, {y})")
+    # print(f"Dropped block {block.block_name} at ({x}, {y})")
 
     if block.is_template:
         if sequence_area.contains(x, y):
@@ -69,8 +54,6 @@ def handle_drop(block, x, y):
         if not sequence_area.contains(x, y):
             block.destroy()
             sequence_area.blocks.remove(block)
-
-    # nt.publish_routine_json(sequence_area.dump_program())
 
 
 blocks_json = nt.get_block_types_json()
@@ -88,8 +71,7 @@ for block_info in blocks_json:
     params_dict_lst = blocks_json.get(block_name).get(
         "params", {})  # List of param dicts
 
-    for param in params_dict_lst:
-        print(param)
+    print(params_dict_lst)
 
     block = Block(palette, block_name=block_name, color="red",
                   params=params_dict_lst, is_template=True)
