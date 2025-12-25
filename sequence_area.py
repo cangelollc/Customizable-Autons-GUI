@@ -4,8 +4,6 @@ import tkinter as tk
 class SequenceArea:
     def __init__(self, parent):
         self.frame = tk.Frame(parent, bg="#f0f0f0")
-        self.frame.pack(fill="both", expand=True)
-
         self.blocks = []
 
     def contains(self, x, y):
@@ -22,8 +20,10 @@ class SequenceArea:
 
     def dump_program(self):  # returns a list of block types in sequence
         program = {}
-        for i, block in enumerate(self.blocks):
-            program[f"block_{i}"] = {
+
+        for block in self.blocks:
+            program[f"block_{self.blocks.index(block)}"] = {
                 "type": block.block_name,
                 "params": block.get_params_dict()
             }
+        return program

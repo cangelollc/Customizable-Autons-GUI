@@ -25,7 +25,10 @@ class NTInterface:
         """Publish an autonomous routine as JSON to NetworkTables"""
         json_str = json.dumps(routine_dict)
         self.routine_json_pub.set(json_str)
-        self.inst.flush()  # force sending
+        self.inst.flush()
+        print()
+        print("Published routine JSON to NT:", json_str)
+        print()
 
     def get_block_types_json(self) -> str:
         entry = self.table.getStringTopic("BlockTypes").getEntry("")

@@ -58,7 +58,6 @@ class Block:
 
             entry.pack(side="left", padx=4)
 
-            entry.bind("<Key>", lambda e: print("typing works"))
             entry.bind("<Button-1>", lambda e, ent=entry: ent.focus_set())
 
             self.param_entry_widget[name] = entry

@@ -37,6 +37,24 @@ program_container.pack(side="right", fill="both", expand=True)
 
 sequence_area = SequenceArea(program_container)
 
+dump_program_btn = tk.Button(
+    program_container,
+    text="Dump Program to Robot",
+    bg="green",
+    height=1,
+    font=("Arial", 15, "bold"),
+    command=lambda: nt.publish_routine_json(sequence_area.dump_program())
+)
+
+dump_program_btn.pack(
+    side="top",
+    fill="x",
+    pady=5
+)
+
+# after the button *important*
+sequence_area.frame.pack(fill="both", expand=True)
+
 
 def handle_drop(block, x, y):
     """When the block is dropped in the sequence area, clone a non template block there."""
@@ -52,7 +70,7 @@ def handle_drop(block, x, y):
             block.destroy()
             sequence_area.blocks.remove(block)
 
-    nt.publish_routine_json(sequence_area.dump_program())
+    # nt.publish_routine_json(sequence_area.dump_program())
 
 
 blocks_json = nt.get_block_types_json()
@@ -61,6 +79,7 @@ blocks_json = json.loads(blocks_json)
 
 print("Block Types JSON from NT:", blocks_json)
 print()
+
 # create blocks from the json data
 for block_info in blocks_json:
     block_name = str(block_info)
