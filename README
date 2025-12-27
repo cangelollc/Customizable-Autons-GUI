@@ -1,2 +1,4 @@
-# To run and import ntcore, type "pip install pyntcore" in the terminal
+# To run and import ntcore and robotpy
+# type "pip install pyntcore" in the terminal
+# type pip install robotpy
 # pyntcore provides Python wrappers for the C++ ntcore library used in the FIRST Robotics Competition (FRC).
